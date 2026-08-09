@@ -6,4 +6,4 @@ for i in range(3):
 print(notas)
 if notas >= 7:
     print('suas notas estao aprovadas')
-    
+
