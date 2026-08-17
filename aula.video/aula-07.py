@@ -1,3 +1,6 @@
+nome = input("Qual é o seu nome? ")
+print('prazer em te conhecer, {:=^20}!'.format(nome))
+
 n1 = int(input('digite um valor:'))
 n2 = int(input('outro valor:'))
 s = n1 + n2 
@@ -7,3 +10,21 @@ di = n1 // n2
 e = n1 ** n2 
 print('a soma é {}, \n o produto é {}, a \n divisão é {:.3f}'.format(s, m, d), end=' ')
 print(' a divisao inteira {} e potencia {}'.format(di, e))
+
+# + = adição
+# - = subtração
+# * = multiplicação
+# / = divisão
+# // = divisão inteira
+# ** = potência
+# % = módulo (resto da divisão)
+
+print('5 + 2 ==', 5 + 2)
+print('5 - 2 ==', 5 - 2)
+print('5 * 2 ==', 5 * 2)
+print('5 / 2 ==', 5 / 2)
+print('5 // 2 ==', 5 // 2)
+print('5 ** 2 ==', 5 ** 2)
+print('5 % 2 ==', 5 % 2)
+
+print('=' * 20)

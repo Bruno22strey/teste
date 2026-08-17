@@ -2,7 +2,7 @@ import tkinter as tk
 
 root = tk.Tk()
 root.title("SENAI - Sistemas")
-root.geometry("800x600")
+root.geometry("500x300")
 
 
 def classificar_imc(imc):
@@ -56,6 +56,7 @@ botao_calcular = tk.Button(
     command=calcular_imc
 )
 botao_calcular.pack(pady=(0, 20))
+
 
 
 resultado_label = tk.Label(
