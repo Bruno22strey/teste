@@ -1,483 +1,324 @@
 import tkinter as tk
 from tkinter import ttk
 
-# Criando a janela
-root = tk.Tk()
-root.title("Calculadora de Resistor")
-root.geometry("800x600")
-
-
-# =========================
-# CANVAS
-# =========================
-
-canvas = tk.Canvas(
-    root,
-    width=700,
-    height=250,
-    bg="white"
-)
-
-canvas.pack(pady=20)
-
-
-# =========================
-# CORES
-# =========================
-
-cores = [
-    "Preto",
-    "Marrom",
-    "Vermelho",
-    "Laranja",
-    "Amarelo",
-    "Verde",
-    "Azul",
-    "Violeta",
-    "Cinza",
-    "Branco"
-]
-
-cores_tolerancia = [
-    "Marrom",
-    "Vermelho",
-    "Verde",
-    "Azul",
-    "Violeta",
-    "Cinza",
-    "Dourado",
-    "Prata"
-]
-
-
-# =========================
-# CONVERTER COR
-# =========================
-
-def converter_cor(cor):
-
-    if cor == "Preto":
-        return "black"
-
-    elif cor == "Marrom":
-        return "brown"
-
-    elif cor == "Vermelho":
-        return "red"
-
-    elif cor == "Laranja":
-        return "orange"
-
-    elif cor == "Amarelo":
-        return "yellow"
-
-    elif cor == "Verde":
-        return "green"
-
-    elif cor == "Azul":
-        return "blue"
-
-    elif cor == "Violeta":
-        return "purple"
-
-    elif cor == "Cinza":
-        return "gray"
-
-    elif cor == "Branco":
-        return "white"
-
-    elif cor == "Dourado":
-        return "gold"
-
-    elif cor == "Prata":
-        return "silver"
-
-
-# =========================
-# DESENHAR RESISTOR
-# =========================
-
-def desenhar_resistor():
-
-    # Apaga o resistor anterior
-    canvas.delete("all")
-
-    # Fios
-    canvas.create_line(
-        50, 125,
-        200, 125,
-        fill="gray",
-        width=5
-    )
-
-    canvas.create_line(
-        500, 125,
-        650, 125,
-        fill="gray",
-        width=5
-    )
-
-    # Corpo do resistor
-    canvas.create_rectangle(
-        200, 75,
-        500, 175,
-        fill="#F0D1B2",
-        outline="black",
-        width=2
-    )
-
-    # Pegando as cores escolhidas
-    cor1 = converter_cor(combo1.get())
-    cor2 = converter_cor(combo2.get())
-    cor3 = converter_cor(combo3.get())
-    cor4 = converter_cor(combo4.get())
-
-    # Primeira faixa
-    canvas.create_rectangle(
-        240, 75,
-        270, 175,
-        fill=cor1
-    )
-
-    # Segunda faixa
-    canvas.create_rectangle(
-        290, 75,
-        320, 175,
-        fill=cor2
-    )
-
-    # Terceira faixa
-    canvas.create_rectangle(
-        340, 75,
-        370, 175,
-        fill=cor3
-    )
-
-    # Faixa de tolerância
-    canvas.create_rectangle(
-        450, 75,
-        480, 175,
-        fill=cor4
-    )
-
-
-# =========================
-# CALCULAR RESISTOR
-# =========================
-
-def calcular():
-
-    cor1 = combo1.get()
-    cor2 = combo2.get()
-    cor3 = combo3.get()
-    cor4 = combo4.get()
-
-
-    # =====================
-    # PRIMEIRA COR
-    # =====================
-
-    if cor1 == "Preto":
-        numero1 = 0
-
-    elif cor1 == "Marrom":
-        numero1 = 1
-
-    elif cor1 == "Vermelho":
-        numero1 = 2
-
-    elif cor1 == "Laranja":
-        numero1 = 3
-
-    elif cor1 == "Amarelo":
-        numero1 = 4
-
-    elif cor1 == "Verde":
-        numero1 = 5
-
-    elif cor1 == "Azul":
-        numero1 = 6
-
-    elif cor1 == "Violeta":
-        numero1 = 7
-
-    elif cor1 == "Cinza":
-        numero1 = 8
-
-    elif cor1 == "Branco":
-        numero1 = 9
-
-
-    # =====================
-    # SEGUNDA COR
-    # =====================
-
-    if cor2 == "Preto":
-        numero2 = 0
-
-    elif cor2 == "Marrom":
-        numero2 = 1
-
-    elif cor2 == "Vermelho":
-        numero2 = 2
-
-    elif cor2 == "Laranja":
-        numero2 = 3
-
-    elif cor2 == "Amarelo":
-        numero2 = 4
-
-    elif cor2 == "Verde":
-        numero2 = 5
-
-    elif cor2 == "Azul":
-        numero2 = 6
-
-    elif cor2 == "Violeta":
-        numero2 = 7
-
-    elif cor2 == "Cinza":
-        numero2 = 8
-
-    elif cor2 == "Branco":
-        numero2 = 9
-
-
-    # =====================
-    # MULTIPLICADOR
-    # =====================
-
-    if cor3 == "Preto":
-        multiplicador = 1
-
-    elif cor3 == "Marrom":
-        multiplicador = 10
-
-    elif cor3 == "Vermelho":
-        multiplicador = 100
-
-    elif cor3 == "Laranja":
-        multiplicador = 1000
-
-    elif cor3 == "Amarelo":
-        multiplicador = 10000
-
-    elif cor3 == "Verde":
-        multiplicador = 100000
-
-    elif cor3 == "Azul":
-        multiplicador = 1000000
-
-    elif cor3 == "Violeta":
-        multiplicador = 10000000
-
-    elif cor3 == "Cinza":
-        multiplicador = 100000000
-
-    elif cor3 == "Branco":
-        multiplicador = 1000000000
-
-
-    # =====================
-    # CALCULO
-    # =====================
-
-    resistencia = (numero1 * 10 + numero2) * multiplicador
-
-
-    # =====================
-    # TOLERÂNCIA
-    # =====================
-
-    if cor4 == "Marrom":
-        tolerancia = 1
-
-    elif cor4 == "Vermelho":
-        tolerancia = 2
-
-    elif cor4 == "Verde":
-        tolerancia = 0.5
-
-    elif cor4 == "Azul":
-        tolerancia = 0.25
-
-    elif cor4 == "Violeta":
-        tolerancia = 0.1
-
-    elif cor4 == "Cinza":
-        tolerancia = 0.05
-
-    elif cor4 == "Dourado":
-        tolerancia = 5
-
-    elif cor4 == "Prata":
-        tolerancia = 10
-
-
-    # =====================
-    # MOSTRAR RESULTADO
-    # =====================
-
-    resultado.config(
-        text="Resistência: "
-        + str(resistencia)
-        + " Ω ± "
-        + str(tolerancia)
-        + "%"
-    )
-
-
-    # Desenhar o resistor
-    desenhar_resistor()
-
-
-# =========================
-# TÍTULO
-# =========================
-
-titulo = tk.Label(
-    root,
-    text="Calculadora de Resistor",
-    font=("Arial", 20, "bold")
-)
-
-titulo.pack()
-
-
-# =========================
-# FRAME
-# =========================
-
-frame = tk.Frame(root)
-frame.pack(pady=10)
-
-
-# =========================
-# PRIMEIRA FAIXA
-# =========================
-
-tk.Label(
-    frame,
-    text="1ª Faixa"
-).grid(row=0, column=0)
-
-combo1 = ttk.Combobox(
-    frame,
-    values=cores,
-    state="readonly"
-)
-
-combo1.set("Marrom")
-
-combo1.grid(
-    row=1,
-    column=0,
-    padx=10
-)
-
-
-# =========================
-# SEGUNDA FAIXA
-# =========================
-
-tk.Label(
-    frame,
-    text="2ª Faixa"
-).grid(row=0, column=1)
-
-combo2 = ttk.Combobox(
-    frame,
-    values=cores,
-    state="readonly"
-)
-
-combo2.set("Preto")
-
-combo2.grid(
-    row=1,
-    column=1,
-    padx=10
-)
-
-
-# =========================
-# TERCEIRA FAIXA
-# =========================
-
-tk.Label(
-    frame,
-    text="Multiplicador"
-).grid(row=0, column=2)
-
-combo3 = ttk.Combobox(
-    frame,
-    values=cores,
-    state="readonly"
-)
-
-combo3.set("Vermelho")
-
-combo3.grid(
-    row=1,
-    column=2,
-    padx=10
-)
-
-
-# =========================
-# TOLERÂNCIA
-# =========================
-
-tk.Label(
-    frame,
-    text="Tolerância"
-).grid(row=0, column=3)
-
-combo4 = ttk.Combobox(
-    frame,
-    values=cores_tolerancia,
-    state="readonly"
-)
-
-combo4.set("Dourado")
-
-combo4.grid(
-    row=1,
-    column=3,
-    padx=10
-)
-
-
-# =========================
-# BOTÃO
-# =========================
-
-botao = tk.Button(
-    root,
-    text="CALCULAR",
-    command=calcular,
-    font=("Arial", 12, "bold")
-)
-
-botao.pack(pady=20)
-
-
-# =========================
-# RESULTADO
-# =========================
-
-resultado = tk.Label(
-    root,
-    text="Resistência: 1000 Ω ± 5%",
-    font=("Arial", 16, "bold")
-)
-
-resultado.pack()
-
-
-# Desenhar o resistor inicialmente
-desenhar_resistor()
-
-
-# Manter a janela aberta
-root.mainloop()
+# ------------------------------------------------------------
+# DADOS (tabelas de cores)
+# ------------------------------------------------------------
+
+# Cor -> número (usado nas 2 primeiras faixas e no multiplicador)
+digitos = {
+    "preto": 0, "marrom": 1, "vermelho": 2, "laranja": 3, "amarelo": 4,
+    "verde": 5, "azul": 6, "violeta": 7, "cinza": 8, "branco": 9
+}
+
+# Multiplicadores especiais
+mult_especial = {"dourado": 0.1, "prateado": 0.01}
+
+# Cor -> tolerância em %
+tolerancias = {
+    "marrom": 1, "vermelho": 2, "verde": 0.5, "azul": 0.25,
+    "violeta": 0.1, "cinza": 0.05, "dourado": 5, "prateado": 10
+}
+
+# Cor -> código de cor usado para pintar na tela
+cores_hex = {
+    "preto": "#111111", "marrom": "#8B4513", "vermelho": "#e53935",
+    "laranja": "#fb8c00", "amarelo": "#fdd835", "verde": "#43a047",
+    "azul": "#1e88e5", "violeta": "#8e24aa", "cinza": "#9e9e9e",
+    "branco": "#ffffff", "dourado": "#d4af37", "prateado": "#c0c0c0"
+}
+
+# Listas que vão aparecer nas caixas de seleção
+lista_digitos = list(digitos.keys())
+lista_mult = list(digitos.keys()) + ["dourado", "prateado"]
+lista_tol = list(tolerancias.keys())
+
+# Cores da interface (fica fácil mudar o tema aqui)
+COR_FUNDO = "#eef2f7"
+COR_CABECALHO = "#1f2a44"
+COR_DESTAQUE = "#26a69a"
+COR_INATIVO = "#cfd8dc"
+
+
+# ------------------------------------------------------------
+# FUNÇÕES
+# ------------------------------------------------------------
+
+def formatar(ohms):
+    """Transforma o valor em texto com Ω, kΩ ou MΩ."""
+    if ohms >= 1000000:
+        return f"{ohms / 1000000:.2f} MΩ"
+    elif ohms >= 1000:
+        return f"{ohms / 1000:.2f} kΩ"
+    else:
+        return f"{ohms:.2f} Ω"
+
+
+def desenhar(lista_cores):
+    """Desenha o resistor. Recebe uma lista com 4 cores (ou None para vazio)."""
+    canvas.delete("all")  # apaga o desenho anterior
+
+    # fio do resistor
+    canvas.create_line(15, 100, 365, 100, width=6, fill="#90a4ae")
+
+    # corpo do resistor (2 bolinhas nas pontas + retângulo no meio)
+    canvas.create_oval(60, 55, 120, 145, fill="#f5deb3", outline="#8d6e63", width=2)
+    canvas.create_oval(260, 55, 320, 145, fill="#f5deb3", outline="#8d6e63", width=2)
+    canvas.create_rectangle(90, 55, 290, 145, fill="#f5deb3", outline="")
+    canvas.create_line(90, 55, 290, 55, fill="#8d6e63", width=2)
+    canvas.create_line(90, 145, 290, 145, fill="#8d6e63", width=2)
+
+    # posição (x) de cada faixa
+    posicoes = [115, 155, 195, 250]
+
+    for i in range(4):
+        if lista_cores is None:
+            cor_faixa = "#dddddd"  # faixa vazia
+        else:
+            cor_faixa = cores_hex[lista_cores[i]]
+            # nome da cor embaixo da faixa
+            canvas.create_text(posicoes[i] + 9, 165, text=lista_cores[i],
+                               font=("Arial", 8), fill="#455a64")
+        canvas.create_rectangle(posicoes[i], 55, posicoes[i] + 18, 145,
+                                fill=cor_faixa, outline="#333333")
+
+
+def atualizar_previa(evento, combo, quadrado):
+    """Pinta o quadradinho ao lado da caixa com a cor escolhida."""
+    cor = combo.get()
+    quadrado.config(bg=cores_hex[cor])
+
+
+def mostrar_modo(modo):
+    """Troca entre os dois modos (cores -> valor / valor -> cores)."""
+    # limpa os textos e o desenho
+    texto_resultado.config(text="—", fg="#90a4ae")
+    texto_detalhe.config(text="Preencha os dados e clique no botão.", fg="#607d8b")
+    desenhar(None)
+
+    if modo == "cores":
+        frame_valor.pack_forget()
+        frame_cores.pack(fill="x")
+        botao_modo1.config(bg=COR_DESTAQUE, fg="white")
+        botao_modo2.config(bg=COR_INATIVO, fg="#37474f")
+    else:
+        frame_cores.pack_forget()
+        frame_valor.pack(fill="x")
+        botao_modo2.config(bg=COR_DESTAQUE, fg="white")
+        botao_modo1.config(bg=COR_INATIVO, fg="#37474f")
+
+
+def calcular_valor():
+    """MODO 1: pega as cores escolhidas e calcula a resistência."""
+    cor1 = combo_b1.get()
+    cor2 = combo_b2.get()
+    cor_mult = combo_mult.get()
+    cor_tol = combo_tol1.get()
+
+    # verifica se falta alguma cor
+    if cor1 == "" or cor2 == "" or cor_mult == "" or cor_tol == "":
+        texto_resultado.config(text="Ops!", fg="#e53935")
+        texto_detalhe.config(text="Escolha todas as cores.", fg="#e53935")
+        return
+
+    # junta os dois primeiros dígitos (ex: 2 e 2 -> 22)
+    numero = digitos[cor1] * 10 + digitos[cor2]
+
+    # pega o multiplicador
+    if cor_mult in mult_especial:
+        multiplicador = mult_especial[cor_mult]
+    else:
+        multiplicador = 10 ** digitos[cor_mult]
+
+    valor = numero * multiplicador
+
+    texto_resultado.config(text=formatar(valor), fg="#1f2a44")
+    texto_detalhe.config(text=f"Tolerância de ±{tolerancias[cor_tol]}%", fg="#607d8b")
+    desenhar([cor1, cor2, cor_mult, cor_tol])
+
+
+def calcular_cores():
+    """MODO 2: pega o valor digitado e descobre as cores."""
+    texto = entrada_valor.get().replace(",", ".")  # aceita vírgula
+
+    # tenta converter o texto em número
+    try:
+        valor = float(texto)
+    except ValueError:
+        texto_resultado.config(text="Ops!", fg="#e53935")
+        texto_detalhe.config(text="Digite um número válido.", fg="#e53935")
+        return
+
+    if valor <= 0:
+        texto_resultado.config(text="Ops!", fg="#e53935")
+        texto_detalhe.config(text="O valor deve ser maior que zero.", fg="#e53935")
+        return
+
+    cor_tol = combo_tol2.get()
+    if cor_tol == "":
+        texto_resultado.config(text="Ops!", fg="#e53935")
+        texto_detalhe.config(text="Escolha a tolerância.", fg="#e53935")
+        return
+
+    # ajusta o valor para ficar entre 10 e 99 (dois dígitos)
+    expoente = 0
+    while valor >= 100:
+        valor = valor / 10
+        expoente = expoente + 1
+    while valor < 10:
+        valor = valor * 10
+        expoente = expoente - 1
+
+    numero = round(valor)
+    if numero == 100:  # caso o arredondamento passe de 99
+        numero = 10
+        expoente = expoente + 1
+
+    # separa os dígitos (ex: 47 -> 4 e 7)
+    d1 = numero // 10
+    d2 = numero % 10
+
+    # descobre o nome das cores
+    cor1 = lista_digitos[d1]
+    cor2 = lista_digitos[d2]
+
+    if expoente == -1:
+        cor_mult = "dourado"
+    elif expoente == -2:
+        cor_mult = "prateado"
+    elif 0 <= expoente <= 9:
+        cor_mult = lista_digitos[expoente]
+    else:
+        texto_resultado.config(text="Ops!", fg="#e53935")
+        texto_detalhe.config(text="Valor fora do limite do resistor.", fg="#e53935")
+        return
+
+    texto_resultado.config(text=f"{cor1} • {cor2} • {cor_mult}", fg="#1f2a44")
+    texto_detalhe.config(text=f"Tolerância: {cor_tol} (±{tolerancias[cor_tol]}%)", fg="#607d8b")
+    desenhar([cor1, cor2, cor_mult, cor_tol])
+
+
+# ------------------------------------------------------------
+# JANELA PRINCIPAL
+# ------------------------------------------------------------
+janela = tk.Tk()
+janela.title("Calculadora de Resistor")
+janela.geometry("800x470")
+janela.config(bg=COR_FUNDO)
+janela.resizable(False, False)
+
+# ------------------------------------------------------------
+# CABEÇALHO (faixa escura no topo)
+# ------------------------------------------------------------
+cabecalho = tk.Frame(janela, bg=COR_CABECALHO, height=70)
+cabecalho.pack(fill="x")
+
+tk.Label(cabecalho, text="⚡ Calculadora de Resistor", bg=COR_CABECALHO,
+         fg="white", font=("Segoe UI", 18, "bold")).pack(side="left", padx=20, pady=15)
+tk.Label(cabecalho, text="Resistores de 4 faixas", bg=COR_CABECALHO,
+         fg="#90a4ae", font=("Segoe UI", 10)).pack(side="right", padx=20)
+
+# ------------------------------------------------------------
+# ÁREA PRINCIPAL (2 cards lado a lado)
+# ------------------------------------------------------------
+corpo = tk.Frame(janela, bg=COR_FUNDO)
+corpo.pack(fill="both", expand=True, padx=20, pady=20)
+
+# ---------- CARD DA ESQUERDA (entrada de dados) ----------
+card_esq = tk.Frame(corpo, bg="white", padx=20, pady=15)
+card_esq.pack(side="left", fill="y")
+
+tk.Label(card_esq, text="Como deseja informar?", bg="white",
+         font=("Segoe UI", 11, "bold"), fg="#37474f").pack(anchor="w", pady=(0, 8))
+
+# botões que trocam o modo
+frame_modos = tk.Frame(card_esq, bg="white")
+frame_modos.pack(fill="x", pady=(0, 15))
+
+botao_modo1 = tk.Button(frame_modos, text="Cores → Valor", font=("Segoe UI", 10, "bold"),
+                        relief="flat", width=14, cursor="hand2",
+                        command=lambda: mostrar_modo("cores"))
+botao_modo1.pack(side="left", padx=(0, 5))
+
+botao_modo2 = tk.Button(frame_modos, text="Valor → Cores", font=("Segoe UI", 10, "bold"),
+                        relief="flat", width=14, cursor="hand2",
+                        command=lambda: mostrar_modo("valor"))
+botao_modo2.pack(side="left")
+
+# ---------- FRAME DO MODO 1: cores -> valor ----------
+frame_cores = tk.Frame(card_esq, bg="white")
+
+# cada linha: texto + caixa de seleção + quadradinho de prévia da cor
+tk.Label(frame_cores, text="Faixa 1", bg="white", font=("Segoe UI", 10)).grid(row=0, column=0, sticky="w", pady=6)
+combo_b1 = ttk.Combobox(frame_cores, values=lista_digitos, state="readonly", width=12)
+combo_b1.grid(row=0, column=1, padx=8)
+previa1 = tk.Label(frame_cores, bg="#eeeeee", width=3, relief="solid", bd=1)
+previa1.grid(row=0, column=2)
+
+tk.Label(frame_cores, text="Faixa 2", bg="white", font=("Segoe UI", 10)).grid(row=1, column=0, sticky="w", pady=6)
+combo_b2 = ttk.Combobox(frame_cores, values=lista_digitos, state="readonly", width=12)
+combo_b2.grid(row=1, column=1, padx=8)
+previa2 = tk.Label(frame_cores, bg="#eeeeee", width=3, relief="solid", bd=1)
+previa2.grid(row=1, column=2)
+
+tk.Label(frame_cores, text="Multiplicador", bg="white", font=("Segoe UI", 10)).grid(row=2, column=0, sticky="w", pady=6)
+combo_mult = ttk.Combobox(frame_cores, values=lista_mult, state="readonly", width=12)
+combo_mult.grid(row=2, column=1, padx=8)
+previa3 = tk.Label(frame_cores, bg="#eeeeee", width=3, relief="solid", bd=1)
+previa3.grid(row=2, column=2)
+
+tk.Label(frame_cores, text="Tolerância", bg="white", font=("Segoe UI", 10)).grid(row=3, column=0, sticky="w", pady=6)
+combo_tol1 = ttk.Combobox(frame_cores, values=lista_tol, state="readonly", width=12)
+combo_tol1.grid(row=3, column=1, padx=8)
+previa4 = tk.Label(frame_cores, bg="#eeeeee", width=3, relief="solid", bd=1)
+previa4.grid(row=3, column=2)
+
+# quando escolher uma cor, pinta o quadradinho
+combo_b1.bind("<<ComboboxSelected>>", lambda e: atualizar_previa(e, combo_b1, previa1))
+combo_b2.bind("<<ComboboxSelected>>", lambda e: atualizar_previa(e, combo_b2, previa2))
+combo_mult.bind("<<ComboboxSelected>>", lambda e: atualizar_previa(e, combo_mult, previa3))
+combo_tol1.bind("<<ComboboxSelected>>", lambda e: atualizar_previa(e, combo_tol1, previa4))
+
+botao_calc1 = tk.Button(frame_cores, text="Calcular resistência", command=calcular_valor,
+                        bg=COR_DESTAQUE, fg="white", font=("Segoe UI", 11, "bold"),
+                        relief="flat", cursor="hand2", pady=6)
+botao_calc1.grid(row=4, column=0, columnspan=3, sticky="ew", pady=(15, 0))
+
+# ---------- FRAME DO MODO 2: valor -> cores ----------
+frame_valor = tk.Frame(card_esq, bg="white")
+
+tk.Label(frame_valor, text="Valor (Ω)", bg="white", font=("Segoe UI", 10)).grid(row=0, column=0, sticky="w", pady=6)
+entrada_valor = tk.Entry(frame_valor, width=15, font=("Segoe UI", 11), relief="solid", bd=1)
+entrada_valor.grid(row=0, column=1, padx=8)
+
+tk.Label(frame_valor, text="Tolerância", bg="white", font=("Segoe UI", 10)).grid(row=1, column=0, sticky="w", pady=6)
+combo_tol2 = ttk.Combobox(frame_valor, values=lista_tol, state="readonly", width=12)
+combo_tol2.grid(row=1, column=1, padx=8)
+
+botao_calc2 = tk.Button(frame_valor, text="Calcular cores", command=calcular_cores,
+                        bg=COR_DESTAQUE, fg="white", font=("Segoe UI", 11, "bold"),
+                        relief="flat", cursor="hand2", pady=6)
+botao_calc2.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(15, 0))
+
+# ---------- CARD DA DIREITA (resultado + desenho) ----------
+card_dir = tk.Frame(corpo, bg="white", padx=20, pady=15)
+card_dir.pack(side="left", fill="both", expand=True, padx=(20, 0))
+
+tk.Label(card_dir, text="RESULTADO", bg="white", fg="#90a4ae",
+         font=("Segoe UI", 9, "bold")).pack(anchor="w")
+
+texto_resultado = tk.Label(card_dir, text="—", bg="white", fg="#90a4ae",
+                           font=("Segoe UI", 22, "bold"))
+texto_resultado.pack(anchor="w")
+
+texto_detalhe = tk.Label(card_dir, text="", bg="white", font=("Segoe UI", 10))
+texto_detalhe.pack(anchor="w", pady=(0, 10))
+
+canvas = tk.Canvas(card_dir, width=380, height=190, bg="#f7f9fb", highlightthickness=0)
+canvas.pack()
+
+# ------------------------------------------------------------
+# INÍCIO DO PROGRAMA
+# ------------------------------------------------------------
+mostrar_modo("cores")  # começa no modo 1
+janela.mainloop()      # mantém a janela aberta
