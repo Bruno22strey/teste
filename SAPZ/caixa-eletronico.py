@@ -4,14 +4,25 @@ Trabalho Prático: Simulador de Caixa Eletrônico
 Usa: variáveis, if/elif/else, laços while e persistência de dados em arquivo.
 """
 
+import os
+
 ARQUIVO_SALDOS = "saldos.txt"   # arquivo onde os saldos ficam salvos (conta;saldo)
 SALDO_INICIAL = 1000            # saldo fictício para contas ainda não utilizadas
 CEDULAS = [100, 50, 20, 10, 5, 2]  # cédulas disponíveis no caixa
 
 
-# ---------------------------------------------------------------
+# Funções de terminal
+
+def limpar_terminal():
+    """Apaga o terminal, inclusive o histórico de rolagem quando possível."""
+    if os.name == "nt":
+        os.system("cls")                         # Windows
+    else:
+        os.system("clear && printf '\\033[3J'")  # Linux / Mac (apaga o scrollback)
+
+
 # Funções de arquivo
-# ---------------------------------------------------------------
+
 def carregar_saldo(conta):
     """Busca o saldo da conta no arquivo. Se não existir, retorna o saldo fictício."""
     try:
@@ -44,9 +55,8 @@ def salvar_saldo(conta, saldo):
             arq.write(c + ";" + s + "\n")
 
 
-# ---------------------------------------------------------------
 # Funções auxiliares
-# ---------------------------------------------------------------
+
 def formatar(valor):
     """Formata o valor como R$ 1250,00."""
     return "R$ " + str(valor) + ",00"
@@ -106,9 +116,8 @@ def mostrar_menu():
     print("4 - Sair")
 
 
-# ---------------------------------------------------------------
 # Programa principal
-# ---------------------------------------------------------------
+
 def main():
     # Laço externo: volta para a tela de conta e senha após "Sair"
     while True:
@@ -125,11 +134,11 @@ def main():
             opcao = input("\nEscolha uma opção: ").strip()
 
             if opcao == "1":
-                # ----- Consultar saldo -----
+                # Consultar saldo
                 print("\nSeu saldo atual é: " + formatar(saldo))
 
             elif opcao == "2":
-                # ----- Sacar -----
+                # Sacar
                 valor = ler_valor("\nDigite o valor para saque: ")
                 if valor is not None:
                     if valor > saldo:
@@ -151,7 +160,7 @@ def main():
                             print("Saldo atual: " + formatar(saldo))
 
             elif opcao == "3":
-                # ----- Depositar -----
+                # Depositar
                 valor = ler_valor("\nDigite o valor para depósito: ")
                 if valor is not None:
                     saldo = saldo + valor
@@ -159,8 +168,9 @@ def main():
                     print("Saldo atual: " + formatar(saldo))
 
             elif opcao == "4":
-                # ----- Sair: salva o saldo no arquivo -----
+                # Sair: salva o saldo no arquivo e apaga o histórico do terminal
                 salvar_saldo(conta, saldo)
+                limpar_terminal()
                 print("\nObrigado por usar nosso sistema!")
                 print("Retornando para tela de conta e senha...")
                 sair = True

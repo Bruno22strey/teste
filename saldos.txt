@@ -1,1 +1,2 @@
-galetao;1100
+galetao;2200
+"C:\Program Files\Python314\python.exe" c:/Users/Aluno/Documents/GitHub/teste/SAPZ/caixa-eletronico.py;1000
